@@ -24,7 +24,7 @@ foreign key (classes_id) references Classes(id)
 
 create table Course(
 id int primary key,
-name varchar(50) not null,
+name varchar(60) not null,
 description text not null
 );
 
