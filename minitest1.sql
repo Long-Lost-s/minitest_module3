@@ -39,12 +39,21 @@ point decimal(5,2)
 );
 
 alter table Address rename column adress to address;
-alter table Address modify column id int primary key auto_increment;
+alter table Address drop column id;
+alter table Address modify id int auto_increment;
+alter table Students drop constraint students_ibfk_1;
+alter table Students add foreign key (address_id) references Address(id);
 
 SELECT * FROM Students WHERE fullname LIKE 'Nguyen%';
 
-SELECT * FROM Students WHERE fullname LIKE '% Anh%';
+SELECT id, age FROM Students WHERE fullname LIKE '% Anh%';
 
 SELECT * FROM Students WHERE age BETWEEN 15 AND 18;
 
 SELECT * FROM Students WHERE id IN (12, 13);
+
+select count(id), classes_id from students group by classes_id;
+
+select count(id), address_id from students group by address_id;
+
+select avg(point), course_id from point group by course_id;
