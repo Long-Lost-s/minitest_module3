@@ -56,4 +56,7 @@ select count(id), classes_id from students group by classes_id;
 
 select count(id), address_id from students group by address_id;
 
-select avg(point), course_id from point group by course_id;
+select avg(point) as avg_point, course_id from point group by course_id;
+
+select course_id, avg(point) as avg_point from point group by course_id order by avg_point desc limit 1;
+
