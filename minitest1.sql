@@ -46,7 +46,7 @@ alter table Students add foreign key (address_id) references Address(id);
 
 SELECT * FROM Students WHERE fullname LIKE 'Nguyen%';
 
-SELECT id, age FROM Students WHERE fullname LIKE '% Anh%';
+SELECT * FROM Students WHERE fullname LIKE '% Anh%';
 
 SELECT * FROM Students WHERE age BETWEEN 15 AND 18;
 
@@ -58,5 +58,12 @@ select count(id), address_id from students group by address_id;
 
 select avg(point) as avg_point, course_id from point group by course_id;
 
-select course_id, avg(point) as avg_point from point group by course_id order by avg_point desc limit 1;
-
+select course_id, round(avg(point),3) as max_avg_point 
+from point 
+group by course_id 
+having max_avg_point >= (select round(max( avg_point),3)
+from (
+select avg(point) as avg_point 
+from point
+group by course_id) 
+as subquery);
